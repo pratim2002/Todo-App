@@ -1,11 +1,15 @@
 appdirs==1.4.4
 asgiref==3.3.1
+certifi @ file:///home/neetyes/.cache/pypoetry/artifacts/db/9d/0a/3683163af3bb7fe252dfa5f98aaa627b305ffe603bfe0bb65ac3224c7a/certifi-2020.12.5-py2.py3-none-any.whl
 cfgv==3.2.0
+chardet @ file:///home/neetyes/.cache/pypoetry/artifacts/f0/e1/66/f8ced421461f1dda06ea89af6ac51a22cf72ff0595f329808634559b2b/chardet-4.0.0-py2.py3-none-any.whl
 click==7.1.2
 distlib==0.3.1
 Django==3.1.5
+django-model-utils @ file:///home/neetyes/.cache/pypoetry/artifacts/cf/4d/f9/fb6b38a0a76886e6d380907b1bed8cd4d467b605e2c836ced0cfd10436/django_model_utils-4.1.1-py3-none-any.whl
 filelock==3.0.12
 identify==1.5.11
+idna @ file:///home/neetyes/.cache/pypoetry/artifacts/71/d9/bc/a8481f6ac8b5d0ecc0fbd34aca906ee68d1757f24fefbd0f4294c0c9d2/idna-2.10-py2.py3-none-any.whl
 importlib-metadata==3.3.0
 mypy-extensions==0.4.3
 nodeenv==1.5.0
@@ -14,10 +18,12 @@ pre-commit==2.9.3
 pytz==2020.5
 PyYAML==5.3.1
 regex==2020.11.13
+requests @ file:///home/neetyes/.cache/pypoetry/artifacts/f2/13/b8/cc7ac8d0aa2630507c04c2c0e72307bed4ee7e2c92d7c3d97a5d61e74e/requests-2.25.1-py2.py3-none-any.whl
 six==1.15.0
 sqlparse==0.4.1
 toml==0.10.2
 typed-ast==1.4.2
 typing-extensions==3.7.4.3
+urllib3 @ file:///home/neetyes/.cache/pypoetry/artifacts/d0/fb/c0/55feef341f343c51ee267c1a241d50723cb2476c70c8934760b4bd8f80/urllib3-1.26.2-py2.py3-none-any.whl
 virtualenv==20.2.2
 zipp==3.4.0
