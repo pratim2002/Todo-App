@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.auth import password_validation
 from .models import User
 
 
@@ -50,4 +49,23 @@ class SignUpForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'first name'}),
             'middle_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'first name'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'last name'}),
+        }
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'email',
+            'first_name',
+            'middle_name',
+            'last_name',
+            'avatar'
+        ]
+        widgets = {
+            'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'email'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'first name'}),
+            'middle_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'first name'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'last name'}),
+            'avatar': forms.FileField(),
         }

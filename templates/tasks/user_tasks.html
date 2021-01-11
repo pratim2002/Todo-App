@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head_title %} Tasks {% endblock head_title %}
+
+{% block content %}
+    <div class="container">
+        {#        {% for task in tasks %}#}
+        {#            <h3>{% ifchanged task.user.first_name %} {{ task.user.first_name }} {% endifchanged %}</h3>#}
+        {#        {% endfor %}#}
+        {% if messages %}
+            {% for mesage in massages %}
+                {{ mesage.tags }} {{ mesage }}
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data" action="">{% csrf_token %}
+            <div class="row mt-5">
+                <div class="col-md-5 offset-3">
+                    {{ form.name }}
+                    {% if errors %}
+                        {{ errors }}
+                    {% endif %}
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">Add Task</button>
+        </form>
+    </div>
+    </div>
+
+    <div class="row mt-5">
+    <div class="col-md-8 offset-2">
+        <table class="table table-hover table-border">
+            <thead>
+            <tr>
+                <th>Tasks</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task }}</td>
+                    <td>{{ task.status }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="{% url 'tasks:task_edit' task.id %}" role="button">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'tasks:task_delete' task.id %}" role="button">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+{% endblock %}

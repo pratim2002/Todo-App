@@ -1,24 +1,59 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
+
+from users.decorators import admin_required
 from .forms import CreateTaskForm
 from .models import Task
 
 
 # Create your views here.
-
-@login_required
-def task_list_view(request):
+@admin_required
+def admin_tasks_view(request):
     tasks = Task.objects.all()
 
     form = CreateTaskForm(request.POST or None)
+    errors = None
     if form.is_valid():
         instance = form.save(commit=False)
+        instance.user = request.user
         instance.save()
-        return HttpResponseRedirect("/tasks/")
+        messages.info(request, "Task added.")
+        return redirect("tasks:admin_task_list")
+    if form.errors:
+        errors = form.errors
 
-    context = {"tasks": tasks, "form": form}
-    template_name = "tasks/index.html"
+    context = {
+        "tasks": tasks,
+        "form": form,
+        "errors": errors
+    }
+    template_name = "tasks/admin_index.html"
+    return render(request, template_name, context)
+
+
+@login_required
+def tasks_view(request):
+    tasks = Task.objects.filter(user=request.user.id)
+
+    form = CreateTaskForm(request.POST or None)
+    errors = None
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.user = request.user
+        instance.save()
+        messages.info(request, "Task added.")
+        return redirect("tasks:task_list")
+    if form.errors:
+        errors = form.errors
+
+    context = {
+        "tasks": tasks,
+        "form": form,
+        "errors": errors
+    }
+    template_name = "tasks/user_tasks.html"
     return render(request, template_name, context)
 
 

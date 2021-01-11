@@ -15,7 +15,7 @@ def admin_required(function):
 
 def user_required(function):
     def wrap(request, *args, **kwargs):
-        if request.user.is_employee():
+        if request.user.is_user():
             return function(request, *args, **kwargs)
         else:
             raise PermissionDenied

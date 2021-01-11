@@ -117,5 +117,8 @@ LOGIN_URL = "/login/"
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "staticfiles"),
+]
 
 BASE_URL = 'http://localhost:8000'

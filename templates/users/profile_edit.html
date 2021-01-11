@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head_title %} Edit Profile {% endblock head_title %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-4 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Update Profile</h5>
+                    <form method="post" enctype="multipart/form-data" class="form-signin"
+                          action="{% url 'edit_profile' user.id %}"> {% csrf_token %}
+                        <div class="form-label-group">
+                            {{ form.email }}
+                            <label for="inputEmail">Email address</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            {{ form.password1 }}
+                            <label for="inputPassword">Password</label>
+                        </div>
+                        <div class="form-label-group">
+                            {{ form.password2 }}
+                            <label for="inputPassword">Confirm Password</label>
+                        </div>
+                        <div class="form-label-group">
+                            {{ form.first_name }}
+                            <label for="inputPassword">First Name</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            {{ form.middle_name }}
+                            <label for="inputPassword">Middle Name</label>
+                        </div>
+                        <div class="form-label-group">
+                            {{ form.last_name }}
+                            <label for="inputPassword">Last Name</label>
+                        </div>
+                         <div class="form-label-group">
+                            {{ form.avatar }}
+                            <label for="inputPassword">Avatar</label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

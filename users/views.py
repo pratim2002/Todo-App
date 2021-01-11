@@ -1,10 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from .models import User
 
 # Create your views here.
-from users.forms import LoginForm, SignUpForm
+from users.forms import LoginForm, SignUpForm, ProfileEditForm
 
 
 def dashboard(request):
@@ -12,7 +13,7 @@ def dashboard(request):
     if user.is_anonymous:
         return redirect('login')
     if user.is_admin():
-        return redirect('tasks:task_list')
+        return redirect('tasks:admin_task_list')
     if user.is_user():
         return redirect('tasks:task_list')
 
@@ -20,7 +21,7 @@ def dashboard(request):
 def user_login(request):
     next = request.GET.get('next', None)
     if request.user.is_authenticated:
-        return redirect('tasks:task_list')
+        return redirect('dashboard')
     form = LoginForm(data=request.POST or None)
     context = {
         'form': form,
@@ -40,7 +41,7 @@ def user_login(request):
                 if next:
                     return redirect(next)
                 messages.success(request, 'Successfully logged in!')
-                return redirect('tasks:task_list')
+                return redirect('dashboard')
     templates = 'users/login.html'
     return render(request, templates, context)
 
@@ -58,7 +59,23 @@ def user_signup(request):
             instance.save()
             messages.success(request, 'sign up successfully'.format(instance.first_name))
             return redirect('login')
-    return render(request, 'users/signup.html', {'form': form})
+    template_name = "users/signup.html"
+    return render(request, template_name, {'form': form})
+
+
+@login_required
+def profile_edit_view(request, id=None):
+    instance = get_object_or_404(User, id=id)
+    form = ProfileEditForm(request.POST or None, request.FILES or None, instance=instance)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return redirect("dashboard")
+    template_name = "users/profile_edit.html"
+    context = {
+        "form": form,
+    }
+    return render(request, template_name, context)
 
 
 def user_logout(request):
