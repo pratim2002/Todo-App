@@ -10,11 +10,19 @@ requests = "^2.25.1"
 django-model-utils = "^4.1.1"
 Pillow = "^8.1.0"
 fontawesome = "^5.10.1"
-django-environ = "^0.4.5"
-psycopg2-binary = "^2.8.6"
-psycopg2 = "^2.8.6"
 
 [tool.poetry.dev-dependencies]
+
+#add following dependencies
+
+#mypy
+#pyls-mypy 
+#black
+#isort
+#bandit
+#pre-commit
+#pyflakes
+#flake8
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
