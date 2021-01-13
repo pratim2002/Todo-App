@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import User
@@ -13,9 +14,16 @@ def dashboard(request):
     if user.is_anonymous:
         return redirect('login')
     if user.is_admin():
-        return redirect('tasks:admin_task_list')
+        if request.COOKIES.get("uid"):
+            #     context = {
+            #         'cookie1': request.COOKIES['uid'],
+            #         'cookie2': request.COOKIES['upw']
+            # }
+            return redirect('tasks:admin_task_list')
     if user.is_user():
-        return redirect('tasks:task_list')
+        if request.COOKIES.get("uid"):
+            print(request.COOKIES['uid'])
+            return redirect('tasks:task_list')
 
 
 def user_login(request):
@@ -30,7 +38,11 @@ def user_login(request):
         if form.is_valid():
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password')
-
+            request.session['uid'] = request.POST['email']
+            if request.POST.get("chk"):
+                response = HttpResponse("cookie")
+                response.set_cookie('uid', request.POST['email'])
+                response.set_cookie('upw', request.POST['password'])
             user = authenticate(username=email, password=password)
             if user is None:
                 messages.error(request, "Invalid login credentials")
@@ -69,11 +81,20 @@ def profile_edit_view(request, id=None):
     form = ProfileEditForm(request.POST or None, request.FILES or None, instance=instance)
     if form.is_valid():
         instance = form.save(commit=False)
+        if instance.avatar is True:
+            instance.avatar = request.FILES['avatar']
         instance.save()
+        # profile_img = form.cleaned_data.get("avatar")
+        # if profile_img and type(profile_img) != str:
+        #     instance.profile_img = instance.save_img(profile_img)
+        #     instance.save()
         return redirect("dashboard")
+    # else:
+    #     form = ProfileEditForm(instance=instance)
     template_name = "users/profile_edit.html"
     context = {
         "form": form,
+        "instance": instance
     }
     return render(request, template_name, context)
 
@@ -85,3 +106,15 @@ def user_logout(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect('login')
+
+
+def set_cookie(request):
+    responce = HttpResponse('cookie')
+    responce.set_cookie('uid', 'user_email')
+    responce.set_cookie('upw', 'user_password')
+
+
+def get_cookie(request):
+    uid = request.COOKIES['uid']
+    upw = request.COOKIES['upw']
+    return HttpResponse('user email' + uid)

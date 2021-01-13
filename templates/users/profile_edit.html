@@ -7,17 +7,28 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-4 mx-auto">
+        <div class="col-md-4 mx-auto mt-5">
+            <div class="card text-center text-white card-signin" style="background-color: teal">
+                {% if instance.avatar.url %}
+                    <div class="card-body p-2">
+                        <img src="{{ instance.avatar.url }}" width="230" height="230"
+                             class="profile_img rounded-circle">
+                    </div>
+                {% endif %}
+                <div class="card-footer">
+                    <p>
+                        {{ instance.get_full_name }}
+                    </p>
+                    <p> {{ instance.email }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-6 col-lg-4 mx-auto">
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Update Profile</h5>
                     <form method="post" enctype="multipart/form-data" class="form-signin"
                           action="{% url 'edit_profile' user.id %}"> {% csrf_token %}
-                        <div class="form-label-group">
-                            {{ form.email }}
-                            <label for="inputEmail">Email address</label>
-                        </div>
-
                         <div class="form-label-group">
                             {{ form.password1 }}
                             <label for="inputPassword">Password</label>
@@ -28,22 +39,26 @@
                         </div>
                         <div class="form-label-group">
                             {{ form.first_name }}
-                            <label for="inputPassword">First Name</label>
+                            <label for="inputFirstName">First Name</label>
                         </div>
 
                         <div class="form-label-group">
                             {{ form.middle_name }}
-                            <label for="inputPassword">Middle Name</label>
+                            <label for="inputMiddleName">Middle Name</label>
                         </div>
                         <div class="form-label-group">
                             {{ form.last_name }}
-                            <label for="inputPassword">Last Name</label>
+                            <label for="inputLastName">Last Name</label>
                         </div>
-                         <div class="form-label-group">
+                        <div class="pl-2">
                             {{ form.avatar }}
-                            <label for="inputPassword">Avatar</label>
+                            <label for="inputLastName">Choose Avatar</label>
                         </div>
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Update Profile</button>
+                        <div>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Update
+                                Profile
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

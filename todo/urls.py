@@ -16,13 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.dashboard, name='dashboard'),
-    path('login/', views.user_login, name='login'),
-    path('logout/', views.user_logout, name='logout'),
-    path('signup/', views.user_signup, name='signup'),
-    path('<id>/edit_profile/', views.profile_edit_view, name='edit_profile'),
-    path('tasks/', include('tasks.urls')),
-]
+                  path('', views.dashboard, name='dashboard'),
+                  path('login/', views.user_login, name='login'),
+                  path('logout/', views.user_logout, name='logout'),
+                  path('signup/', views.user_signup, name='signup'),
+                  path('<id>/edit_profile/', views.profile_edit_view, name='edit_profile'),
+                  path('set_cookie/', views.set_cookie, name='s_cookie'),
+                  path('get_cookie/', views.get_cookie, name='g_cookie'),
+                  path('tasks/', include('tasks.urls')),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

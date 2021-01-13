@@ -1,6 +1,9 @@
+import os
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.db import models
 from model_utils import Choices
+from PIL import Image
+from todo import settings
 
 # Create your models here.
 USER_ROLES = Choices(
@@ -42,7 +45,7 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=25, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     role = models.CharField(max_length=254, choices=USER_ROLES, default=USER_ROLES.admin)
-    avatar = models.ImageField(upload_to="avatars/", null=True, blank=True)
+    avatar = models.ImageField(upload_to="profile/", default='profile/nitesh1.jpg', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -52,12 +55,11 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = []
 
     def get_full_name(self):
-        full_name = self.first_name
         if self.middle_name:
-            full_name = full_name + '' + self.middle_name
-            if self.last_name:
-                full_name = full_name + '' + self.last_name
-                return full_name
+            full_name = self.first_name + ' ' + self.middle_name + ' ' + self.last_name
+        else:
+            full_name = self.first_name + ' ' + self.last_name
+        return full_name
 
     def get_short_name(self):
         return self.first_name
@@ -70,6 +72,18 @@ class User(AbstractBaseUser):
 
     def is_user(self):
         return self.role == USER_ROLES.user
+
+    @staticmethod
+    def get_avatar_photos_media_path():
+        path = os.path.join(settings.MEDIA_ROOT, 'profile')
+        if not os.path.exists(path):
+            os.makedirs(path)
+        return path
+
+    def save_img(self, file):
+        img = Image.open(file)
+        img.save(os.path.join(self.get_avatar_photos_media_path(), 'user_image_{}{}'.format(self.id, file)))
+        return 'emp_image_{}{}'.format(self.id, file)
 
     class Meta:
         db_table = "users_user"

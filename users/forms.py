@@ -53,19 +53,22 @@ class SignUpForm(forms.ModelForm):
 
 
 class ProfileEditForm(forms.ModelForm):
+    avatar = forms.ImageField(
+        required=False,
+        label="Profile Image",
+        widget=forms.FileInput(),
+    )
+
     class Meta:
         model = User
         fields = [
-            'email',
             'first_name',
             'middle_name',
             'last_name',
             'avatar'
         ]
         widgets = {
-            'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'email'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'first name'}),
             'middle_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'first name'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'last name'}),
-            'avatar': forms.FileField(),
         }

@@ -6,8 +6,10 @@ chardet @ file:///home/neetyes/.cache/pypoetry/artifacts/f0/e1/66/f8ced421461f1d
 click==7.1.2
 distlib==0.3.1
 Django==3.1.5
+django-environ @ file:///home/neetyes/.cache/pypoetry/artifacts/02/f5/07/088c90fb343e0afae07fa494be4114b30189c29231a92d744f3234fb0f/django_environ-0.4.5-py2.py3-none-any.whl
 django-model-utils @ file:///home/neetyes/.cache/pypoetry/artifacts/cf/4d/f9/fb6b38a0a76886e6d380907b1bed8cd4d467b605e2c836ced0cfd10436/django_model_utils-4.1.1-py3-none-any.whl
 filelock==3.0.12
+fontawesome @ file:///home/neetyes/.cache/pypoetry/artifacts/ca/24/73/0ef54fe49e39cd2230c51d90a4305c4623ce06b9fef833d5304c0836e0/fontawesome-5.10.1.post1-py3-none-any.whl
 identify==1.5.11
 idna @ file:///home/neetyes/.cache/pypoetry/artifacts/71/d9/bc/a8481f6ac8b5d0ecc0fbd34aca906ee68d1757f24fefbd0f4294c0c9d2/idna-2.10-py2.py3-none-any.whl
 importlib-metadata==3.3.0
