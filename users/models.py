@@ -55,10 +55,14 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = []
 
     def get_full_name(self):
-        if self.middle_name:
+        if self.first_name:
+            full_name = self.first_name
+        elif self.first_name and self.last_name:
+            full_name = self.first_name + ' ' + self.last_name
+        elif self.first_name and self.middle_name and self.last_name:
             full_name = self.first_name + ' ' + self.middle_name + ' ' + self.last_name
         else:
-            full_name = self.first_name + ' ' + self.last_name
+            full_name = ''
         return full_name
 
     def get_short_name(self):
