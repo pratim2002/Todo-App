@@ -10,13 +10,24 @@ requests = "^2.25.1"
 django-model-utils = "^4.1.1"
 Pillow = "^8.1.0"
 fontawesome = "^5.10.1"
+mypy = "^0.790"
+psycopg2-binary = "^2.8.6"
+psycopg2 = "^2.8.6"
+pyls-mypy = "^0.1.8"
+black = "^20.8b1"
+isort = "^5.7.0"
+bandit = "^1.7.0"
+pre-commit = "^2.9.3"
+pyflakes = "^2.2.0"
+flake8 = "^3.8.4"
+django-environ = "^0.4.5"
 
 [tool.poetry.dev-dependencies]
 
 #add following dependencies
 
 #mypy
-#pyls-mypy 
+#pyls-mypy
 #black
 #isort
 #bandit

@@ -10,7 +10,7 @@
         <div class="col-md-4 mx-auto mt-5">
             <div class="card text-center text-white card-signin" style="background-color: teal">
                 {% if instance.avatar %}
-                    <div class="card-body p-2">
+                    <div class="card-body p-2" id="img-box">
                         <img src="{{ instance.avatar.url }}" width="230" height="230"
                              class="profile_img rounded-circle">
                     </div>
@@ -29,14 +29,6 @@
                     <h5 class="card-title text-center">Update Profile</h5>
                     <form method="post" enctype="multipart/form-data" class="form-signin"
                           action="{% url 'edit_profile' user.id %}"> {% csrf_token %}
-                        <div class="form-label-group">
-                            {{ form.password1 }}
-                            <label for="inputPassword">Password</label>
-                        </div>
-                        <div class="form-label-group">
-                            {{ form.password2 }}
-                            <label for="inputPassword">Confirm Password</label>
-                        </div>
                         <div class="form-label-group">
                             {{ form.first_name }}
                             <label for="inputFirstName">First Name</label>
@@ -64,4 +56,7 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'js/edit_profile.js' %}"></script>
 {% endblock %}

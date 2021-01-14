@@ -1,12 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import User
 
 # Create your views here.
-from users.forms import LoginForm, SignUpForm, ProfileEditForm
+from users.forms import LoginForm, SignUpForm, ProfileEditForm, PasswordChangeForm
 
 
 def dashboard(request):
@@ -23,6 +23,8 @@ def dashboard(request):
     if user.is_user():
         if request.COOKIES.get("uid"):
             print(request.COOKIES['uid'])
+            return redirect('tasks:task_list')
+        else:
             return redirect('tasks:task_list')
 
 
@@ -71,8 +73,26 @@ def user_signup(request):
             instance.save()
             messages.success(request, 'sign up successfully'.format(instance.first_name))
             return redirect('login')
-    template_name = "users/signup.html"
-    return render(request, template_name, {'form': form})
+    template = "users/signup.html"
+    return render(request, template, {'form': form})
+
+
+@login_required
+def user_password_change(request):
+    """
+    Change user password
+    """
+    form = PasswordChangeForm(data=request.POST or None, user=request.user)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Password changed successfully")
+            return redirect('login')
+    context = {
+        'form': form
+    }
+    template = 'users/change_password.html'
+    return render(request, template, context)
 
 
 @login_required
@@ -89,14 +109,31 @@ def profile_edit_view(request, id=None):
         #     instance.profile_img = instance.save_img(profile_img)
         #     instance.save()
         return redirect("dashboard")
-    # else:
-    #     form = ProfileEditForm(instance=instance)
+
     template_name = "users/profile_edit.html"
     context = {
         "form": form,
         "instance": instance
     }
     return render(request, template_name, context)
+
+
+def update_profile_ajax(request, id=None):
+    instance = get_object_or_404(User, id=id)
+    form = ProfileEditForm(request.POST or None, request.FILES or None, instance=instance)
+
+    data = {}
+    if request.is_ajax():
+        if form.is_valid():
+            form.save()
+            data['first_name'] = form.cleaned_data.get('first_name')
+            data['status'] = 'ok'
+            return JsonResponse(data)
+    context = {
+        'form': form,
+    }
+    template = 'users/profile_edit_ajax.html'
+    return render(request, template, context)
 
 
 def user_logout(request):

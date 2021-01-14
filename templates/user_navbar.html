@@ -13,14 +13,15 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item active">
-                <a class="nav-link" href='#'>{{request.user.email}}</a>
+                <a class="nav-link" href='#'>{{ request.user.email }}</a>
             </li>
             <li class="dropdown">
                 <a href="#" class="" data-toggle="dropdown" role="button" aria-haspopup="true"
                    aria-expanded="false"><i class="fa fa-user-circle fa-2x white"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="" class="dropdown-item">Change Password</a>
+                    <a href="{% url 'change_password' %}" class="dropdown-item">Change Password</a>
                     <a href="{% url 'edit_profile' request.user.id %}" class="dropdown-item">View Profile</a>
+                    <a href="{% url 'edit_profile_ajax' request.user.id %}" class="dropdown-item">Update Profile</a>
                     <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
                 </div>
             </li>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head_title %} Edit Profile {% endblock head_title %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="mt-3">
+        <div class="alert-box"> </div>
+        <form id="p-form" action="{% url 'edit_profile_ajax' user.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div id="img-box"></div>
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'js/edit_profile.js' %}"></script>
+{% endblock %}
