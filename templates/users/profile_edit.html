@@ -7,6 +7,15 @@
 
 {% block content %}
     <div class="row">
+     <div class="alert-box"></div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissable ">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <strong>{{ message.tags }} !!</strong> {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
 
         <div class="col-md-4 mx-auto mt-5">
             <div class="card text-center text-white card-signin" style="background-color: teal">
@@ -52,7 +61,6 @@
                                 Profile
                             </button>
                         </div>
-                        <div class="alert-box"></div>
                     </form>
                 </div>
             </div>

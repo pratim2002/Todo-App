@@ -8,6 +8,14 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-4 mx-auto">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissable mt-2">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                        <strong>{{ message.tags }} !!</strong> {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Sign In</h5>

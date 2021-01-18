@@ -19,7 +19,7 @@ def admin_tasks_view(request):
         instance = form.save(commit=False)
         instance.user = request.user
         instance.save()
-        messages.info(request, "Task added.")
+        messages.info(request, "Task added successfully.")
         return redirect("tasks:admin_task_list")
     if form.errors:
         errors = form.errors
@@ -43,7 +43,7 @@ def tasks_view(request):
         instance = form.save(commit=False)
         instance.user = request.user
         instance.save()
-        messages.info(request, "Task added.")
+        messages.info(request, "Task added successfully.")
         return redirect("tasks:task_list")
     if form.errors:
         errors = form.errors
@@ -64,6 +64,7 @@ def task_edit_view(request, id=None):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
+        messages.info(request, "Task updated successfully.")
         return HttpResponseRedirect("/tasks/")
     template_name = "tasks/task_edit.html"
     context = {
@@ -76,4 +77,5 @@ def task_edit_view(request, id=None):
 def task_delete_view(request, id=None):
     instance = get_object_or_404(Task, id=id)
     instance.delete()
+    messages.info(request, "Task deleted successfully.")
     return redirect("tasks:task_list")

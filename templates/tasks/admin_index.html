@@ -4,12 +4,12 @@
 
 {% block content %}
     <div class="container">
-        {#        {% for task in tasks %}#}
-        {#            <h3>{% ifchanged task.user.first_name %} {{ task.user.first_name }} {% endifchanged %}</h3>#}
-        {#        {% endfor %}#}
         {% if messages %}
-            {% for mesage in massages %}
-                {{ mesage.tags }} {{ mesage }}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissable ">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <strong>{{ message.tags }} !!</strong> {{ message }}
+                </div>
             {% endfor %}
         {% endif %}
 
@@ -43,7 +43,7 @@
             {% for task in tasks %}
                 <tr>
                     <td>
-                        {% ifchanged task.user.first_name %} {{ task.user.first_name }} {% endifchanged %}
+                        {% ifchanged task.user.email %} {{ task.user.email }} {% endifchanged %}
                     </td>
                     <td>{{ task }}</td>
                     <td>{{ task.status }}</td>
