@@ -15,26 +15,27 @@
 
         <form method="post" enctype="multipart/form-data" action="">{% csrf_token %}
             <div class="row mt-5">
-                <div class="col-md-5 offset-3">
+                <div class="col-md-5 offset-1">
                     {{ form.name }}
-                    {% if errors %}
-                        {{ errors }}
-                    {% endif %}
                 </div>
-                <div class="col-md-3">
+                 <div class="col-md-3">
+                    {{ form.assign_to }}
+                </div>
+                <div class="col-md-2">
                     <button type="submit" class="btn btn-primary">Add Task</button>
         </form>
     </div>
     </div>
 
     <div class="row mt-5">
-    <div class="col-md-8 offset-2">
+    <div class="col-md-9 offset-1">
         <table class="table table-hover table-border">
             <thead>
             <tr>
                 <th>User</th>
                 <th>Tasks</th>
                 <th>Status</th>
+                <th>Assigned To</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -47,6 +48,7 @@
                     </td>
                     <td>{{ task }}</td>
                     <td>{{ task.status }}</td>
+                    <td>{{ task.assign_to }}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="{% url 'tasks:task_edit' task.id %}"
                            role="button">Edit</a>

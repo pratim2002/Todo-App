@@ -87,15 +87,15 @@ def user_password_change(request):
 def profile_edit_view(request, id=None):
     instance = get_object_or_404(User, id=id)
     form = ProfileEditForm(request.POST or None, request.FILES or None, instance=instance)
-    data = {}
+    # data = {}
     if request.is_ajax():
         if form.is_valid():
                 instance = form.save(commit=False)
                 if instance.avatar is True:
                     instance.avatar = request.FILES['avatar']
                 form.save()
-                data['first_name'] = form.cleaned_data.get('first_name')
-                data['status'] = 'ok'
+                # data['first_name'] = form.cleaned_data.get('first_name')
+                # data['status'] = 'ok'
                 # return JsonResponse({'status': 'success'})
                 return HttpResponse("Profile update sucessfully")
     context = {

@@ -13,6 +13,7 @@ class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     name = models.CharField(max_length=255)
     status = models.CharField(max_length=25, choices=STATUS, default=STATUS[0][0], blank=True)
+    assign_to = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='assigned_user', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

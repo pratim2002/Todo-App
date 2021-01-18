@@ -6,15 +6,18 @@
     <div class="card col-md-4 offset-4 mt-5">
         <div class="card-body">
             <form method="post" enctype="multipart/form-data">{% csrf_token %}
-                    <div>
-                        {{ form.name }}
-                    </div>
-                    <div class="mt-2 mb-2">
-                        {{ form.status }}
-                    </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary offset-4">Update Task</button>
-                    </div>
+                <div>
+                    {{ form.name }}
+                </div>
+                <div class="mt-2 mb-2">
+                    {{ form.status }}
+                </div>
+                <div class="mt-2 mb-2">
+                    {{ form.assign_to }}
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary offset-4">Update Task</button>
+                </div>
             </form>
         </div>
     </div>

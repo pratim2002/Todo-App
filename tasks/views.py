@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.db.models import Q
 
 from users.decorators import admin_required
 from .forms import CreateTaskForm
@@ -35,13 +36,14 @@ def admin_tasks_view(request):
 
 @login_required
 def tasks_view(request):
-    tasks = Task.objects.filter(user=request.user.id)
+    tasks = Task.objects.filter(Q(user=request.user.id) | Q(assign_to=request.user.id)).order_by('-updated_at')
 
     form = CreateTaskForm(request.POST or None)
     errors = None
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user = request.user
+        instance.assign_to = request.user
         instance.save()
         messages.info(request, "Task added successfully.")
         return redirect("tasks:task_list")

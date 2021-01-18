@@ -34,15 +34,16 @@
             <tr>
                 <th>Tasks</th>
                 <th>Status</th>
+                <th>Assigned By</th>
                 <th>Action</th>
             </tr>
             </thead>
-
             <tbody>
             {% for task in tasks %}
                 <tr>
                     <td>{{ task }}</td>
                     <td>{{ task.status }}</td>
+                    <td>{{ task.user }}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="{% url 'tasks:task_edit' task.id %}"
                            role="button">Edit</a>
@@ -51,7 +52,6 @@
                 </tr>
             {% endfor %}
             </tbody>
-
         </table>
     </div>
 {% endblock %}
