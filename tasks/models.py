@@ -4,7 +4,9 @@ from users.models import User
 # Create your models here.
 
 STATUS = (
+    ("To Do", "To Do"),
     ("In Progress", "In Progress"),
+    ("Testing", "Testing"),
     ("Completed", "Completed"),
 )
 

@@ -28,13 +28,14 @@
     </div>
 
     <div class="row mt-5">
-    <div class="col-md-8 offset-2">
+    <div class="col-md-10 offset-1">
         <table class="table table-hover table-border">
             <thead>
             <tr>
                 <th>Tasks</th>
                 <th>Status</th>
                 <th>Assigned By</th>
+                <th>Created At</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -44,6 +45,7 @@
                     <td>{{ task }}</td>
                     <td>{{ task.status }}</td>
                     <td>{{ task.user }}</td>
+                    <td>{{ task.created_at }}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="{% url 'tasks:task_edit' task.id %}"
                            role="button">Edit</a>

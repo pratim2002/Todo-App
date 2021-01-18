@@ -40,7 +40,9 @@ def user_login(request):
                 login(request, user)
                 if request.POST.get("chk"):
                     response = HttpResponse("cookie")
-                    response.set_cookie('uid', request.POST['email'])
+                    response.set_cookie('uid', request.POST['email'], max_age=300)
+                    print(response.cookies)
+
                 if next:
                     return redirect(next)
                 messages.success(request, 'Successfully logged in!')
@@ -97,7 +99,7 @@ def profile_edit_view(request, id=None):
                 # data['first_name'] = form.cleaned_data.get('first_name')
                 # data['status'] = 'ok'
                 # return JsonResponse({'status': 'success'})
-                return HttpResponse("Profile update sucessfully")
+                return HttpResponse("Profile updated successfully")
     context = {
         'form': form,
         "instance": instance

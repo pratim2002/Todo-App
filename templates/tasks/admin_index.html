@@ -18,7 +18,7 @@
                 <div class="col-md-5 offset-1">
                     {{ form.name }}
                 </div>
-                 <div class="col-md-3">
+                <div class="col-md-3">
                     {{ form.assign_to }}
                 </div>
                 <div class="col-md-2">
@@ -28,36 +28,39 @@
     </div>
 
     <div class="row mt-5">
-    <div class="col-md-9 offset-1">
-        <table class="table table-hover table-border">
-            <thead>
-            <tr>
-                <th>User</th>
-                <th>Tasks</th>
-                <th>Status</th>
-                <th>Assigned To</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            {% for task in tasks %}
+        <div class="col-md-12">
+            <table class="table table-hover table-border">
+                <thead>
                 <tr>
-                    <td>
-                        {% ifchanged task.user.email %} {{ task.user.email }} {% endifchanged %}
-                    </td>
-                    <td>{{ task }}</td>
-                    <td>{{ task.status }}</td>
-                    <td>{{ task.assign_to }}</td>
-                    <td>
-                        <a class="btn btn-primary btn-sm" href="{% url 'tasks:task_edit' task.id %}"
-                           role="button">Edit</a>
-                        <a class="btn btn-danger btn-sm" href="{% url 'tasks:task_delete' task.id %}" role="button">Delete</a>
-                    </td>
+                    <th>User</th>
+                    <th>Tasks</th>
+                    <th>Status</th>
+                    <th>Assigned To</th>
+                    <th>Created At</th>
+                    <th>Action</th>
                 </tr>
-            {% endfor %}
-            </tbody>
+                </thead>
 
-        </table>
+                <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        <td>
+                            {% ifchanged task.user.email %} {{ task.user.email }} {% endifchanged %}
+                        </td>
+                        <td>{{ task }}</td>
+                        <td>{{ task.status }}</td>
+                        <td>{{ task.assign_to }}</td>
+                        <td>{{ task.created_at }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="{% url 'tasks:task_edit' task.id %}"
+                               role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'tasks:task_delete' task.id %}" role="button">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
     </div>
 {% endblock %}
