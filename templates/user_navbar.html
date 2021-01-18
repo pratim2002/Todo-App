@@ -21,7 +21,6 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="{% url 'change_password' %}" class="dropdown-item">Change Password</a>
                     <a href="{% url 'edit_profile' request.user.id %}" class="dropdown-item">View Profile</a>
-                    <a href="{% url 'edit_profile_ajax' request.user.id %}" class="dropdown-item">Update Profile</a>
                     <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
                 </div>
             </li>

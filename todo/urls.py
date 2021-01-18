@@ -25,8 +25,5 @@ urlpatterns = [
                   path('signup/', views.user_signup, name='signup'),
                   path('change_password/', views.user_password_change, name='change_password'),
                   path('<id>/edit_profile/', views.profile_edit_view, name='edit_profile'),
-                  path('<id>/update_profile/', views.update_profile_ajax, name='edit_profile_ajax'),
-                  path('set_cookie/', views.set_cookie, name='s_cookie'),
-                  path('get_cookie/', views.get_cookie, name='g_cookie'),
                   path('tasks/', include('tasks.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -7,6 +7,7 @@
 
 {% block content %}
     <div class="row">
+
         <div class="col-md-4 mx-auto mt-5">
             <div class="card text-center text-white card-signin" style="background-color: teal">
                 {% if instance.avatar %}
@@ -27,8 +28,8 @@
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Update Profile</h5>
-                    <form method="post" enctype="multipart/form-data" class="form-signin"
-                          action="{% url 'edit_profile' user.id %}"> {% csrf_token %}
+                    <form id="p-form" method="post" enctype="multipart/form-data" class="form-signin"
+                          action="{% url 'edit_profile' user.id %}" autocomplete="off"> {% csrf_token %}
                         <div class="form-label-group">
                             {{ form.first_name }}
                             <label for="inputFirstName">First Name</label>
@@ -51,6 +52,7 @@
                                 Profile
                             </button>
                         </div>
+                        <div class="alert-box"></div>
                     </form>
                 </div>
             </div>
