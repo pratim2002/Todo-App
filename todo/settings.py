@@ -139,3 +139,15 @@ MEDIA_ROOT = os.path.join(VAR_PATH, "media")
 
 
 BASE_URL = env('BASE_URL')
+
+
+# Email sent setup
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'andisasimkhada@gmail.com'
+# EMAIL_HOST_PASSWORD = 'Neetyou2'
+EMAIL_HOST = 'mail.pds.com.np'
+EMAIL_HOST_USER = 'probin@pds.com.np'
+EMAIL_HOST_PASSWORD = '123456789'
+EMAIL_PORT = 587

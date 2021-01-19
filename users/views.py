@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import User
@@ -12,7 +12,8 @@ from users.forms import LoginForm, SignUpForm, ProfileEditForm, PasswordChangeFo
 def dashboard(request):
     user = request.user
     if user.is_anonymous:
-        return redirect('login')
+        # return redirect('login')
+        return HttpResponseRedirect('/login/')
     if user.is_admin():
         return redirect('tasks:admin_task_list')
     if user.is_user():
@@ -20,8 +21,8 @@ def dashboard(request):
 
 
 def user_login(request):
-    if request.user.is_authenticated and request.COOKIES.get("uid"):
-        return redirect('dashboard')
+    # if request.user.is_authenticated and request.COOKIES.get("uid"):
+    #     return redirect('dashboard')
     next = request.GET.get('next', None)
     form = LoginForm(data=request.POST or None)
     context = {
