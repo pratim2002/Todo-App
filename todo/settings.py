@@ -36,6 +36,7 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
 # Application definition
 
 INSTALLED_APPS = [
+    "crispy_forms",
     "users",
     "tasks",
     "django.contrib.admin",
@@ -144,10 +145,13 @@ BASE_URL = env('BASE_URL')
 # Email sent setup
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'andisasimkhada@gmail.com'
-# EMAIL_HOST_PASSWORD = 'Neetyou2'
+# EMAIL_HOST = env('EMAIL_HOST')
+# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_HOST = 'mail.pds.com.np'
 EMAIL_HOST_USER = 'probin@pds.com.np'
 EMAIL_HOST_PASSWORD = '123456789'
 EMAIL_PORT = 587
+
+# for crispy form
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -21,19 +21,11 @@ pre-commit = "^2.9.3"
 pyflakes = "^2.2.0"
 flake8 = "^3.8.4"
 django-environ = "^0.4.5"
+django-crispy-forms = "^1.10.0"
 
 [tool.poetry.dev-dependencies]
 
 #add following dependencies
-
-#mypy
-#pyls-mypy
-#black
-#isort
-#bandit
-#pre-commit
-#pyflakes
-#flake8
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
